@@ -2,7 +2,32 @@ package endpoint
 
 import (
 	"context"
+	"net/http"
+
+	"github.com/gorilla/mux"
 )
+
+func main() {
+	r := mux.NewRouter()
+	r.HandleFunc("/getuserinfo", GetUserInfo).Methods(http.MethodGet)
+	http.Handle("/", r)
+}
+
+func GetUserInfo(w http.ResponseWriter, r *http.Request) {
+	// ctx := r.Context()
+
+	// fmt.Printf("%s: got /hello request\n", ctx.Value(keyServerAddr))
+
+	// myName := r.PostFormValue("myName")
+	// if myName == "" {
+	// 	w.Header().Set("x-missing-field", "myName")
+	// 	w.WriteHeader(http.StatusBadRequest)
+	// 	return
+	// }
+	// io.WriteString(w, fmt.Sprintf("Hello, %s!\n", myName))
+
+	http.Error(w, "Unable to GetUserInfo", http.StatusBadRequest)
+}
 
 // Endpoint is the fundamental building block of servers and clients.
 // It represents a single RPC method.
